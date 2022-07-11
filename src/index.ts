@@ -1,18 +1,24 @@
-const core = require('@actions/core');
-const aws = require('aws-sdk');
+import core from '@actions/core';
+import aws from 'aws-sdk';
 
 async function run() {
     try {
         const sqsUrl = core.getInput('sqs-url', { required: false });
         const variables = core.getInput('variables', { required: false });
 
-        const splitVariables = variables.toUpperCase().split(",");
+        const splitVars = variables.toUpperCase().split(",");
 
-        const message = process.env(splitVariables[0]);
+        // @ts-ignore
+        const message = splitVars.reduce((prv,crv) => {
+            return {
+              ...prv,
+              [crv]: process.env[crv]
+            }
+          }, {})
 
         const params = {
             QueueUrl: sqsUrl,
-            MessageBody: message,
+            MessageBody: JSON.stringify(message),
         };
         
         const sqs = new aws.SQS();
