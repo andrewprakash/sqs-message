@@ -1,7 +1,7 @@
 import core from '@actions/core';
 import aws from 'aws-sdk';
 
-async function run() {
+export const run = async () => {
     try {
         const sqsUrl = core.getInput('sqs-url', { required: false });
         const variables = core.getInput('variables', { required: false });
@@ -34,7 +34,6 @@ async function run() {
     }
 }
 
-module.exports = run;
 
 /* istanbul ignore next */
 if (require.main === module) {
