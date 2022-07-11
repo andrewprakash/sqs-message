@@ -2,7 +2,7 @@ import core from '@actions/core';
 import aws from 'aws-sdk';
 
 export const run = async () => {
-    try {
+
         const sqsUrl = core.getInput('sqs-url', { required: false });
         const variables = core.getInput('variables', { required: false });
 
@@ -21,6 +21,8 @@ export const run = async () => {
             MessageBody: JSON.stringify(message),
         };
         
+        console.log(params);
+
         const sqs = new aws.SQS();
         sqs.sendMessage(params, (err, resp) => {
             if (err) {
@@ -29,9 +31,6 @@ export const run = async () => {
                 console.log(`resp ${JSON.stringify(resp, null, 2)}`);
             }
         })
-    } catch (error) {
-        core.setFailed(error.message);
-    }
 }
 
 
