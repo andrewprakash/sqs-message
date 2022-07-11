@@ -10,8 +10,6 @@ async function run() {
 
         const message = process.env(splitVariables[0]);
 
-        console.log(message);
-
         const params = {
             QueueUrl: sqsUrl,
             MessageBody: message,
