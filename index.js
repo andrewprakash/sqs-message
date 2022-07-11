@@ -4,15 +4,19 @@ const aws = require('aws-sdk');
 async function run() {
     try {
         const sqsUrl = core.getInput('sqs-url', { required: false });
-        const hasVariables = core.getBooleanInput('hasVariables', { required: false });
-        const message = core.getInput('message', { required: false });
+        const variables = core.getInput('variables', { required: false });
+
+        const splitVariables = variables.toUpperCase().split(",");
+
+        const message = process.env(splitVariables[0]);
+
+        console.log(message);
+
         const params = {
             QueueUrl: sqsUrl,
             MessageBody: message,
         };
         
-        console.log(hasVariables);
-
         const sqs = new aws.SQS();
         sqs.sendMessage(params, (err, resp) => {
             if (err) {

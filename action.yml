@@ -7,11 +7,8 @@ inputs:
   sqs-url:
     description: "AWS SQS url"
     required: true
-  hasVariables:
-    description: "if there are env variables to parsed"
-    required: false
-  message:
-    description: "message boty to send"
+  variables:
+    description: "variables to send"
     required: true
 runs:
   using: "node12"
