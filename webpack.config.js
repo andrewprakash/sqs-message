@@ -11,7 +11,7 @@ module.exports = {
     externals: ['aws-sdk'],
     output: {
         libraryTarget: 'commonjs2',
-        filename: '[name]/dist/index.js',
+        filename: 'index.js',
         path: path.resolve(__dirname, 'dist'),
     },
     module: {
