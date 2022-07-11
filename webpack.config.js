@@ -8,7 +8,6 @@ module.exports = {
     resolve: {
         extensions: ['.mjs', '.ts', '.js'],
     },
-    externals: ['aws-sdk'],
     output: {
         libraryTarget: 'commonjs2',
         filename: 'index.js',
