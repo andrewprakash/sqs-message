@@ -11,5 +11,7 @@ inputs:
     description: "variables to send"
     required: true
 runs:
-  using: "node12"
-  main: "dist/index.js"
+  using: "composite"
+  steps: 
+    - run: ls -al
+      shell: bash
